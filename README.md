@@ -1,2 +1,2 @@
-# piciginTheGame
+# peetseeGAME
 picigin the game
