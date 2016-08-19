@@ -32,6 +32,9 @@ public class Screen {
 	}
 
 	public void update() {
+		for (IGameObject o : gameObjects) {
+			o.update();
+		}
 	}
 
 	public void render() {
