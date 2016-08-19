@@ -5,7 +5,6 @@ import static hr.java.peetseegame.main.GlobalSettings.*;
 import java.awt.Canvas;
 import java.awt.Dimension;
 import java.awt.Graphics;
-import java.awt.event.KeyEvent;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
@@ -131,7 +130,7 @@ public class Game extends Canvas implements Runnable {
 
 	public void getKeyGame() {
 		screen.keyPressed(keyboard.keys);
-		
+
 		// PAUSE
 		if (keyboard.isPause())
 			if (gameState == STATE.GAME)
