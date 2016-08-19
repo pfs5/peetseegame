@@ -2,23 +2,45 @@ package hr.java.peetseegame.graphics;
 
 import static hr.java.peetseegame.main.GlobalSettings.*;
 
-public class Screen {
-	public int[] pixels;
+import java.util.ArrayList;
 
+import hr.java.peetseegame.gamelogics.IGameObject;
+import hr.java.peetseegame.gamelogics.TestObject;
+
+public class Screen {
+
+	private static final long serialVersionUID = 1L;
+
+	private ArrayList<IGameObject> gameObjects;
+	public int [] pixels;
+	
 	public Screen() {
-		pixels = new int[WINDOW_WIDTH * WINDOW_HEIGHT];
+		// Create pixels
+		pixels = new int [WINDOW_HEIGHT*WINDOW_WIDTH];
+		
+		gameObjects = new ArrayList<IGameObject>();
+		gameObjects.add(new TestObject(WINDOW_WIDTH / 2, WINDOW_WIDTH, 100, 100));
 	}
 
 	public void clear() {
-		for (int y = 0; y < WINDOW_HEIGHT; y++)
-			for (int x = 0; x < WINDOW_WIDTH; x++)
-				pixels[y * WINDOW_WIDTH + x] = 0x000000;
+		for (int i=0; i<pixels.length; i++) {
+			pixels[i] = 0xff000000;
+		}
 	}
-
-	public void render() {
-	}
-
+	
 	public void update() {
+	}
+	
+	public void render(){
+		for (IGameObject o : gameObjects) {
+			o.render(pixels);
+		}
+	}
+
+	public void keyPressed(boolean[] keys) {
+		for (IGameObject o : gameObjects) {
+			o.keyPressed(keys);
+		}
 	}
 
 }

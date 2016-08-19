@@ -1,5 +1,7 @@
 package hr.java.peetseegame.main;
 
+import java.awt.Color;
+
 public class GlobalSettings {
 	// Game state
 	public static enum STATE {
@@ -8,7 +10,7 @@ public class GlobalSettings {
 
 	// Frame and update rates
 	public static final int UPS = 30;
-	public static final int FPS = 60;
+	public static final int FPS = 300;
 
 	// Screen settings
 	public static final String TITLE = "PeeTsee/Game";
@@ -16,5 +18,6 @@ public class GlobalSettings {
 	public static final int WINDOW_WIDTH = 500;
 	public static final int WINDOW_HEIGHT = (int) (WINDOW_WIDTH * RATIO);
 	public static final int SCALE = 2;
+	public static final Color CLEAR_COLOR = Color.BLACK;
 
 }
