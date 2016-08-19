@@ -130,32 +130,8 @@ public class Game extends Canvas implements Runnable {
 	}
 
 	public void getKeyGame() {
-		// WASD
-		if (keyboard.keys[KeyEvent.VK_W])
-			;
-
-		if (keyboard.keys[KeyEvent.VK_A])
-			;
-
-		if (keyboard.keys[KeyEvent.VK_S])
-			;
-
-		if (keyboard.keys[KeyEvent.VK_D])
-			;
-
-		// ARROW KEYS
-		if (keyboard.keys[KeyEvent.VK_UP])
-			;
-
-		if (keyboard.keys[KeyEvent.VK_LEFT])
-			;
-
-		if (keyboard.keys[KeyEvent.VK_DOWN])
-			;
-
-		if (keyboard.keys[KeyEvent.VK_RIGHT])
-			;
-
+		screen.keyPressed(keyboard.keys);
+		
 		// PAUSE
 		if (keyboard.isPause())
 			if (gameState == STATE.GAME)
