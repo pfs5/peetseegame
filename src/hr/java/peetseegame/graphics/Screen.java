@@ -6,11 +6,8 @@ import java.util.ArrayList;
 
 import hr.java.peetseegame.gamelogics.DomagojObject;
 import hr.java.peetseegame.gamelogics.IGameObject;
-import hr.java.peetseegame.gamelogics.TestObject;
 
 public class Screen {
-
-	private static final long serialVersionUID = 1L;
 
 	private ArrayList<IGameObject> gameObjects;
 	public int[] pixels;
