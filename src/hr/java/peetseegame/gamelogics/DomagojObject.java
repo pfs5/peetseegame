@@ -61,7 +61,14 @@ public class DomagojObject implements IGameObject {
 					continue;
 				}
 
-				pixels[globalRow * WINDOW_WIDTH + globalCol] = imagePixels[row * width + col];
+				int globalIndex = globalRow * WINDOW_WIDTH + globalCol;
+				int localIndex = row * width + col;
+
+				if (globalIndex < 0 || globalIndex >= pixels.length) {
+					continue;
+				}
+
+				pixels[globalIndex] = imagePixels[localIndex];
 			}
 		}
 	}
