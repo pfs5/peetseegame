@@ -20,4 +20,9 @@ public class GlobalSettings {
 	public static final int SCALE = 2;
 	public static final Color CLEAR_COLOR = Color.BLACK;
 
+	public static final String BACKGROUND_PATH = "./src/resources/background.png";
+
+	// Physics
+	public static final double G_ACCELERATION = 1.5;
+
 }
