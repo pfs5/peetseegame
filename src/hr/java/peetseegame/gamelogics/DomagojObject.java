@@ -9,11 +9,11 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
+import hr.java.peetseegame.main.GlobalSettings;
+
 public class DomagojObject implements IGameObject {
 
-	private static String path = "./src/resources/domagoj.png";
-	private static int X_INIT = 0;
-	private static int Y_INIT = 0;
+	private static final String path = "./src/resources/domagoj.png";
 
 	// Image
 	private int[] imagePixels;
@@ -24,11 +24,18 @@ public class DomagojObject implements IGameObject {
 	private int x;
 	private int y;
 
+	// Animation
+	private static final int JUMP_SPEED = 14;
+	private boolean jumpState;
+	private int verticalSpeed;
+	private int horizontalSpeed = 3;
+	private int gravity = 2;
+
 	public DomagojObject() {
 		initGraphics();
 
-		x = X_INIT;
-		y = Y_INIT;
+		x = GlobalSettings.WINDOW_WIDTH / 2;
+		y = GlobalSettings.WINDOW_HEIGHT - height;
 	}
 
 	private void initGraphics() {
@@ -46,7 +53,7 @@ public class DomagojObject implements IGameObject {
 				}
 			}
 		} catch (IOException e) {
-			System.out.println("Error loading domagoj.");
+			System.out.println("Error loading Domagoj.");
 		}
 	}
 
@@ -75,25 +82,44 @@ public class DomagojObject implements IGameObject {
 
 	@Override
 	public void update() {
-		// TODO Auto-generated method stub
+		if (jumpState) {
+			verticalSpeed -= gravity;
+
+			y -= verticalSpeed;
+
+			int yRelativeToFloor = GlobalSettings.WINDOW_HEIGHT - height;
+
+			if (y > yRelativeToFloor) {
+				y = yRelativeToFloor;
+				jumpState = false;
+			}
+		}
 
 	}
 
 	@Override
 	public void keyPressed(boolean[] keys) {
+
 		// Movement
 		if (keys[KeyEvent.VK_LEFT]) {
-			x -= 1;
+			x -= horizontalSpeed;
 		}
-		if (keys[KeyEvent.VK_RIGHT]) {
 
-			x += 1;
+		if (keys[KeyEvent.VK_RIGHT]) {
+			x += horizontalSpeed;
 		}
+
+		if (jumpState) {
+			// Disable UP and DOWN actions while jumping.
+			return;
+		}
+
 		if (keys[KeyEvent.VK_UP]) {
-			y = Math.abs(y - 1);
+			verticalSpeed = JUMP_SPEED;
+			jumpState = true;
 		}
+
 		if (keys[KeyEvent.VK_DOWN]) {
-			y += 1;
 		}
 	}
 
