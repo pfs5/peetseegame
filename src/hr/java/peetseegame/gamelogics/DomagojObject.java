@@ -4,11 +4,11 @@ import static hr.java.peetseegame.main.GlobalSettings.*;
 
 import java.awt.event.KeyEvent;
 
+import hr.java.peetseegame.main.GlobalSettings;
+
 public class DomagojObject extends AbstractGameObject {
 
-	private static String path = "./src/resources/domagoj.png";
-	private static int X_INIT = 0;
-	private static int Y_INIT = 0;
+	private static final String path = "./src/resources/domagoj.png";
 
 	// Image
 	private int[] imagePixels;
@@ -17,11 +17,18 @@ public class DomagojObject extends AbstractGameObject {
 	private int x;
 	private int y;
 
+	// Animation
+	private static final int JUMP_SPEED = 14;
+	private boolean jumpState;
+	private int verticalSpeed;
+	private int horizontalSpeed = 3;
+	private int gravity = 2;
+
 	public DomagojObject() {
 		imagePixels = loadImage(path);
 
-		x = X_INIT;
-		y = Y_INIT;
+		x = GlobalSettings.WINDOW_WIDTH / 2;
+		y = GlobalSettings.WINDOW_HEIGHT - height;
 	}
 
 	@Override
@@ -51,25 +58,44 @@ public class DomagojObject extends AbstractGameObject {
 
 	@Override
 	public void update() {
-		// TODO Auto-generated method stub
+		if (jumpState) {
+			verticalSpeed -= gravity;
+
+			y -= verticalSpeed;
+
+			int yRelativeToFloor = GlobalSettings.WINDOW_HEIGHT - height;
+
+			if (y > yRelativeToFloor) {
+				y = yRelativeToFloor;
+				jumpState = false;
+			}
+		}
 
 	}
 
 	@Override
 	public void keyPressed(boolean[] keys) {
+
 		// Movement
 		if (keys[KeyEvent.VK_LEFT]) {
-			x -= 5;
+			x -= horizontalSpeed;
 		}
-		if (keys[KeyEvent.VK_RIGHT]) {
 
-			x += 5;
+		if (keys[KeyEvent.VK_RIGHT]) {
+			x += horizontalSpeed;
 		}
+
+		if (jumpState) {
+			// Disable UP and DOWN actions while jumping.
+			return;
+		}
+
 		if (keys[KeyEvent.VK_UP]) {
-			y = Math.abs(y - 5);
+			verticalSpeed = JUMP_SPEED;
+			jumpState = true;
 		}
+
 		if (keys[KeyEvent.VK_DOWN]) {
-			y += 5;
 		}
 	}
 
